@@ -37,6 +37,11 @@ struct pos_node{
 	unsigned count = 0;
 };
 
+//get the distance between x & y
+int distance(unsigned x,unsigned y){
+	return(((x > y) ? (x-y) : (y-x)));
+}
+
 class CharMatcher{
 	private:
 		int width;
@@ -52,10 +57,19 @@ class CharMatcher{
 		int** board; //char board*[]; //array of linklists? of structs, power jems? Color?
 		bool legal_move(pos p1, pos p2){
 			bool legal = false;
+			cout << "p1.x < width) && (p2.x < width)" << ((p1.x < width) && (p2.x < width)) << endl;
+			cout << "((p1.y < height) && (p2.y < height))" << ((p1.y < height) && (p2.y < height)) << endl;
+			cout << "hozitonal distance 1: " << ((distance(p1.x, p2.x) == 1) && ((p1.y - p2.y) == 0)) << endl;
+			cout << "vertical distance 1: " << ((distance(p1.y, p2.y) == 1) && ((p1.x - p2.x) == 0) ) << endl;
+			cout << "p1.x - p2.x" << (int)p1.x - (int)p2.x << endl;
+			cout << "p1.y - p2.y" << (int)p1.y - (int)p2.y << endl;
+			cout << "p1"; p1.print();
+			cout << "p2"; p2.print();
+
 			if ((p1.x < width) && (p2.x < width) //bounds
 				&& ((p1.y < height) && (p2.y < height)) //bounds
-				&& ((abs(p1.x - p2.x) == 1) && ((p1.y - p2.y) == 0)) //hozitonal distance 1
-					|| ((abs(p1.y - p2.y) == 1) && ((p1.x - p2.x) == 0) ) //or vertical distance 1
+				&& (((distance(p1.x, p2.x) == 1) && ((p1.y - p2.y) == 0)) //hozitonal distance 1
+					|| ((distance(p1.y, p2.y) == 1) && ((p1.x - p2.x) == 0) )) //or vertical distance 1
 				){
 				swap(p1,p2); 
 				legal = any_matches();
@@ -166,8 +180,12 @@ class CharMatcher{
 		
 		//TODO: implement a que for items, clear or replace both swaped then fall each row after finished next
 		unsigned update_board(){
-		
-			return(false);} 
+			unsigned score = 0;
+			//while (any_matches()){
+				cout << "update_board any_matches while loop" << endl;
+				// TODO: Fill with x's
+			//}
+			return(score);} 
 		
 		//TODO: create matches to matches and it returns a pos struct of the largest one
 		pos_node get_biggest_match(){

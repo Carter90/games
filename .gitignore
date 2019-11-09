@@ -7,3 +7,5 @@ devel
 logs
 .catkin_tools
 *.o
+
+CharMatcher/cmake-build-debug/

@@ -9,6 +9,7 @@
  */
 #include <string>
 #include <iostream>
+#include <vector>
 #ifndef CHARMATCHER_H
 #define CHARMATCHER_H
 
@@ -31,10 +32,6 @@ struct pos {
 	} // end pos_dist_is_one
 };
 
-struct pos_pair {
-	pos p1;
-	pos p2;
-};
 
 struct pos_node{
 	pos p;
@@ -44,12 +41,14 @@ struct pos_node{
 	unsigned count_right = 0;
 	unsigned count_vert = 0;
 	bool from_above = false;
+	bool from_below= false;
 	pos_node(){;}
-	pos_node(pos np, bool above){
+	pos_node(pos np, bool above=false, bool below=false){
 	    this->p = np;
-	    this->count_right = 1;
-	    this->count_vert = 1;
+	    this->count_right = 0;
+	    this->count_vert = 0;
 	    this->from_above = above;
+		this->from_below = below;
 	}
 };
 
@@ -58,7 +57,7 @@ class CharMatcher {
 		CharMatcher() : CharMatcher(15,10,7){};
 		CharMatcher(int new_height, int new_width, int new_num_of_symbols);
 		~CharMatcher();
-		std::string move(std::string move);
+        int move(std::string move);
 		void consoleUI();
 		void draw_board();
 		void generate_board();
@@ -81,10 +80,11 @@ class CharMatcher {
 		bool is_same_symbol(int a, int b, int c) const;
 		bool is_same_symbol(pos p1, pos p2) const;
 		bool any_matches() const;
-		unsigned update_board();
-		pos_node* populate_pos_node(pos p,bool=false);
-		pos_node get_biggest_match();
-		unsigned swap(pos p1, pos p2);
+		pos_node* populate_pos_node(pos p,bool=false,bool=false);
+		pos_node* get_biggest_match();
+		void swap(pos p1, pos p2);
+		std::vector<pos> get_three_matches_pos();
+        unsigned x_all_nodes(pos_node* pn);
 
 };
 #endif

@@ -68,7 +68,7 @@ class CharMatcher {
 		int num_of_symbols;
 		int max_num_of_symbols;
 		int score;
-		bool debug = true;
+		bool debug = false;
 		//TODO: try uint32_t for multi-character characters, wchar_t seems to not work
 		std::string symbols[11] = {"x","■", "◆","▲","●","▮","◢","▰","◣","◤","◥"}; 
 		std::string colors[8] = {"","\033[1;31m", "\033[1;32m", "\033[1;33m", "\033[1;34m", "\033[1;35m", "\033[1;36m", "\033[1;37m"};
@@ -85,6 +85,8 @@ class CharMatcher {
 		void swap(pos p1, pos p2);
 		std::vector<pos> get_three_matches_pos();
         unsigned x_all_nodes(pos_node* pn);
+        void shiftdown();
+        bool board_has_x();
 
 };
 #endif

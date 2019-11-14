@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 #include "CharMatcher.h"
 using namespace std;
 	/**
@@ -8,6 +9,7 @@ using namespace std;
 	 * @returns 0 compleated sucessfully
 	 */	
 int main(int argc, char *argv[]) {
+	srand(time(0));
 	cout << "Greetings!";
 	//TODO: prompt for size?
 	CharMatcher char_mather;

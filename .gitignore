@@ -9,3 +9,7 @@ logs
 *.o
 
 CharMatcher/cmake-build-debug/
+
+CharMatcher/CharMatcher
+
+CharMatcher/CMakeLists.txt

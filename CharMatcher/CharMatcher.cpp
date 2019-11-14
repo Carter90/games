@@ -390,12 +390,12 @@ return(-1);
 } //end move
 
 void CharMatcher::consoleUI(){
-    cout << "Rev0.1" << endl;
 	string input = "NONE";
 	int status = 0;
 	clear_screen();
 	draw_board();
-	cout << "Enter moves like \"a b 12\" or \"11 a 12\":";
+	cout << "Remember to exit type [stop|done|gg] or send EOF" << endl;
+	cout << "Enter moves like \"a b 12\" or \"11 a 12\"" << endl << "First Move:";
 	while (!no_more_moves() && getline(cin,input)
 		   && input != "stop" && input != "done" && input != "gg"){
 		clear_screen();
@@ -403,9 +403,12 @@ void CharMatcher::consoleUI(){
 		clear_screen();
 		draw_board();
 		cout.width(8);
-        if (status <= 0){cout << "Last Move Error" << endl;} else {score += status;}
+        if (status <= 0){cout << "Last Move Had An Error" << endl;} else {score += status;}
 		cout << right << "\tScore: " << score << endl;
 		cout << R"(Enter moves like "a b 12" or "11 a 12")" << endl;
+		// TODO: remove printing status as an int have it as an index to an array of compliments
+		// TODO: Like nice good excellent fantastic extraordinary what not
+		// TODO: if status is negative display appropriate error message
 		cout <<"Last Move:"<< input << " was "<< status << " matches" <<endl << "Next:";
 	} //end while
 
